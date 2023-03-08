@@ -1,0 +1,1 @@
+$("#error").html("SKU already exist!");

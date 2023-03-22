@@ -6,6 +6,7 @@ trait SetData
 {
     private $tablename;
     private $typetablename;
+    private $listview;
     private $id;
     private $sku;
     private $name;
@@ -123,6 +124,15 @@ trait SetData
     {
         return $this->typeid;
     }
+    protected function setListView($listview)
+    {
+        $this->listview = $listview;
+    }
+
+    protected function getListView()
+    {
+        return $this->listview;
+    }
 }
 
 //setting ang getting all data
@@ -131,6 +141,7 @@ class GetData
     use SetData;
     public static $gtable;
     public static $gtypetable;
+    public static $glistview;
     public static $gid;
     public static $gsku;
     public static $gname;
@@ -146,6 +157,7 @@ class GetData
     {
         $this->setTableName('product');
         $this->setTypeTableName('producttype');
+        $this->setListView('list');
         $this->setID('ID');
         $this->setSKU('SKU');
         $this->setName('Name');
@@ -161,6 +173,7 @@ class GetData
     public function _GetAll(){
         self::$gtable = $this->getTableName();
         self::$gtypetable = $this->getTypeTableName();
+        self::$glistview = $this->getListView();
         self::$gid = $this->getID();
         self::$gsku = $this->getSKU();
         self::$gname = $this->getName();

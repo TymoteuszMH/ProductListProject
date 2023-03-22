@@ -16,17 +16,7 @@ class SiteData implements S\SiteContent{
     public function _InitializeClass($data, $con){
         $res = self::_Data(
             $con,
-            $data::$gtable, 
-            $data::$gtypetable, 
-            $data::$gid, 
-            $data::$gsku, 
-            $data::$gname, 
-            $data::$gprice, 
-            $data::$gproducttypeid,
-            $data::$gdesc,
-            $data::$gtitle, 
-            $data::$gtypeid,
-            $data::$gatribute); 
+            $data); 
         self::_ShowData(
             $res, 
             $data::$gid, 
@@ -39,8 +29,8 @@ class SiteData implements S\SiteContent{
     }
     
     //getting data for cards
-    protected function _Data($con, $table, $typetable, $id, $sku, $name, $price, $producttypeid, $desc, $title, $typeid, $atribute){
-        $sql = "SELECT $id, $sku, $name, $price, $title, $atribute, $desc FROM $table INNER JOIN $typetable WHERE $producttypeid=$typeid";
+    protected function _Data($con, $data){
+        $sql = "SELECT * FROM ".$data::$glistview;
         return $con->_Action($sql);
     }
 

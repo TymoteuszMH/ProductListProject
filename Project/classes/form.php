@@ -17,7 +17,7 @@ class FormOptions implements S\SiteContent
     //class initializing file, implemented from site.php, it also gets data in site.php
     public function _InitializeClass($data, $con){
         $result = self::_Data(  $con, 
-                                $data::$gtypetable);
+                                $data);
         self::_Options( $result, 
                         $data::$gtitle, 
                         $data::$gtypeid);
@@ -33,8 +33,8 @@ class FormOptions implements S\SiteContent
     }
 
     //getting types data
-    private static function _Data($con, $table){
-        $sql = "SELECT * FROM $table";
+    private static function _Data($con, $data){
+        $sql = "SELECT * FROM ".$data::$table;
         return $con->_Action($sql);
     }
 }

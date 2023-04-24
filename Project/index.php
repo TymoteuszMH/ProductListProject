@@ -23,8 +23,8 @@
             </div>
         </form>
     </body>
+    <?php 
+        include 'classes/site.php';
+        new InitializeSite(1);
+    ?>
 </html>
-<?php 
-    include 'classes/site.php';
-    new InitializeSite(1);
-?>

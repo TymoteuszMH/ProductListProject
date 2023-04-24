@@ -2,7 +2,7 @@
 namespace Site\Data;
 
 //setters and getters for sql names 
-trait SetData
+trait Data
 {
     private $tablename;
     private $typetablename;
@@ -17,143 +17,124 @@ trait SetData
     private $title;
     private $atribute;
 
-    protected function setTableName($tablename)
+    public function setTableName($tablename)
     {
         $this->tablename = $tablename;
     }
 
-    protected function getTableName()
+    public function getTableName()
     {
         return $this->tablename;
     }
 
-    protected function setTypeTableName($typetablename)
+    public function setTypeTableName($typetablename)
     {
         $this->typetablename = $typetablename;
     }
 
-    protected function getTypeTableName()
+    public function getTypeTableName()
     {
         return $this->typetablename;
     }
 
-    protected function setID($id)
+    public function setID($id)
     {
         $this->id = $id;
     }
 
-    protected function getID()
+    public function getID()
     {
         return $this->id;
     }
-    protected function setSKU($sku)
+    public function setSKU($sku)
     {
         $this->sku = $sku;
     }
 
-    protected function getSKU()
+    public function getSKU()
     {
         return $this->sku;
     }
 
-    protected function setName($name)
+    public function setName($name)
     {
         $this->name = $name;
     }
 
-    protected function getName()
+    public function getName()
     {
         return $this->name;
     }
 
-    protected function setPrice($price)
+    public function setPrice($price)
     {
         $this->price = $price;
     }
 
-    protected function getPrice()
+    public function getPrice()
     {
         return $this->price;
     }
 
-    protected function setTitle($title)
+    public function setTitle($title)
     {
         $this->title = $title;
     }
 
-    protected function getTitle()
+    public function getTitle()
     {
         return $this->title;
     }
-    protected function setAtribute($atribute)
+    public function setAtribute($atribute)
     {
         $this->atribute = $atribute;
     }
 
-    protected function getAtribute()
+    public function getAtribute()
     {
         return $this->atribute;
     }
 
-    protected function setDescription($description)
+    public function setDescription($description)
     {
         $this->description = $description;
     }
 
-    protected function getDescription()
+    public function getDescription()
     {
         return $this->description;
     }
 
-    protected function setProductTypeID($producttypeid)
+    public function setProductTypeID($producttypeid)
     {
         $this->producttypeid = $producttypeid;
     }
 
-    protected function getProductTypeID()
+    public function getProductTypeID()
     {
         return $this->producttypeid;
     }
 
-    protected function setTypeID($typeid)
+    public function setTypeID($typeid)
     {
         $this->typeid = $typeid;
     }
 
-    protected function getTypeID()
+    public function getTypeID()
     {
         return $this->typeid;
     }
-    protected function setListView($listview)
+    public function setListView($listview)
     {
         $this->listview = $listview;
     }
 
-    protected function getListView()
+    public function getListView()
     {
         return $this->listview;
     }
-}
 
-//setting ang getting all data
-class GetData
-{
-    use SetData;
-    public static $gtable;
-    public static $gtypetable;
-    public static $glistview;
-    public static $gid;
-    public static $gsku;
-    public static $gname;
-    public static $gprice;
-    public static $gproducttypeid;
-    public static $gdesc;
-    public static $gtitle;
-    public static $gtypeid;
-    public static $gatribute;
-
-    //setting all
-    public function _SetAll()
+    public function __construct()
     {
         $this->setTableName('product');
         $this->setTypeTableName('producttype');
@@ -161,29 +142,12 @@ class GetData
         $this->setID('ID');
         $this->setSKU('SKU');
         $this->setName('Name');
-        $this->setPrice('Price');
+        $this->setPrice('PRICE');
         $this->setTitle('Title');
         $this->setAtribute('Atribute');
         $this->setDescription('Description');
         $this->setTypeID('IDType');
         $this->setProductTypeID('TypeID');
     } 
-
-    //defining all to variables by getting
-    public function _GetAll(){
-        self::$gtable = $this->getTableName();
-        self::$gtypetable = $this->getTypeTableName();
-        self::$glistview = $this->getListView();
-        self::$gid = $this->getID();
-        self::$gsku = $this->getSKU();
-        self::$gname = $this->getName();
-        self::$gprice = $this->getPrice();
-        self::$gproducttypeid = $this->getProductTypeID();
-        self::$gdesc = $this->getDescription();
-        self::$gtitle = $this->getTitle();
-        self::$gtypeid = $this->getTypeID();
-        self::$gatribute = $this->getAtribute();
-    }
-
 }
 ?>

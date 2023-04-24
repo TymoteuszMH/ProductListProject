@@ -26,9 +26,10 @@
             <label for="price" class="form-label">Price($): </label>
             <input type="number" step="any" class="form-control" id="price" name="price" required><br>
             <label for="price" class="form-label">Type: </label>
-            <select id='productType' class='form-select' aria-label='Type' name="type" required></select><br>
-            <script src='classes/js/form_change.js'></script> <!-- changing inputs on type change -->
+            <select id='productType' class='form-select' aria-label='Type' name="type" required><br>
+            </select>
             <div id='Desc'></div>
+            <script src='classes/js/form_change.js'></script> <!-- changing inputs on type change -->
         </div>
         </form>
     </body>

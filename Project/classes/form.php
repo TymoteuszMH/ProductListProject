@@ -9,23 +9,24 @@ use Site\Validation as Val;
 
 class FormOptions implements S\SiteContent
 {   
+    use S\Data\Data;
     //this consts are for making jquery script to show data in specific location on form
     const script_start = '<script> $("#productType").html("';
-    const def_option = "<option value='' selected disabled hidden>Choose here</option>";
     const script_end = '");</script>';
 
     //class initializing file, implemented from site.php, it also gets data in site.php
-    public function _InitializeClass($data, $con){
+    public function _InitializeClass($con){
         $result = self::_Data(  $con, 
-                                $data);
+                                $this->getTypeTableName());
         self::_Options( $result, 
-                        $data::$gtitle, 
-                        $data::$gtypeid);
+                        $this->getTitle(), 
+                        $this->getTypeID());
     }
 
     //getting all tipes and showing them as options
     private function _Options($result, $title, $typeID){
-        echo self::script_start.self::def_option;
+        echo self::script_start;
+        echo "<option value='' selected disabled hidden>Choose here</option>";
         while ($row = $result->fetch_assoc()) { 
             echo "<option id='".$row[$title]."' value='".$row[$typeID]."'>".$row[$title]."</option>";
         }
@@ -33,13 +34,15 @@ class FormOptions implements S\SiteContent
     }
 
     //getting types data
-    private static function _Data($con, $data){
-        $sql = "SELECT * FROM ".$data::$table;
+    private static function _Data($con, $table){
+        $sql = "SELECT * FROM $table";
         return $con->_Action($sql);
     }
 }
+
 class FormData implements S\SiteContent
 {
+    use S\Data\Data;
     
     protected static $book;
     protected static $dvd;
@@ -50,9 +53,9 @@ class FormData implements S\SiteContent
     const script = "<script src='classes/js/go_to_inx.js'></script>";
 
     //class initializing file, implemented from site.php, it also gets data in site.php
-    public function _InitializeClass($data, $con){
+    public function _InitializeClass($con){
         self::_GetReferences();
-        self::_FormData($data, $con);
+        self::_FormData($con);
     }
 
     //defining variables to classes
@@ -63,12 +66,12 @@ class FormData implements S\SiteContent
     }
     
     //in order: chenging if sku already exists, validating description of different types, defining data, showing error if something wrong, else sending data
-    private function _FormData($data, $con){
+    private function _FormData($con){
         $err_count=0;
         if(isset($_POST['val'])){
             $check = self::_Check(  $con,
-                                    $data::$gtable,
-                                    $data::$gsku,
+                                    $this->getTableName(),
+                                    $this->getSKU(),
                                     $_POST["sku"]);
             if(mysqli_num_rows($check)!=0){
                 $err_count++;
@@ -76,23 +79,23 @@ class FormData implements S\SiteContent
             $descCont = [   '1' =>isset($_POST["desc"])? self::$dvd->_Validate($_POST["desc"]) : "",
                             '2' =>isset($_POST["desc"])? self::$book->_Validate($_POST["desc"]) : "",
                             '3' =>isset($_POST["height"]) ? self::$fur->_Validate([$_POST["height"], $_POST["width"], $_POST["length"]]): ""];
-            $skuF = $_POST["sku"];
-            $nameF = $_POST["name"];
-            $priceF = $_POST["price"];
-            $typeIDF = $_POST["type"];
-            $descF = $descCont[$typeIDF];
+            $sku = $_POST["sku"];
+            $name = $_POST["name"];
+            $price = $_POST["price"];
+            $typeID = $_POST["type"];
+            $desc = $descCont[$typeID];
 
             if($err_count>0){
                 echo self::err;
             }else{
                 self::_SendData($con,
-                                $data::$gtable, 
-                                $data::$gsku, 
-                                $data::$gname, 
-                                $data::$gprice, 
-                                $data::$gproducttypeid, 
-                                $data::$gdesc, 
-                                $skuF, $nameF, $priceF, $typeIDF, $descF);
+                                $this->getTableName(), 
+                                $this->getSKU(), 
+                                $this->getName(), 
+                                $this->getPrice(), 
+                                $this->getProductTypeID(),
+                                $this->getDescription(), 
+                                $sku, $name, $price, $typeID, $desc);
             }
         }
     }

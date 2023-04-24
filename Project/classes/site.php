@@ -13,7 +13,7 @@ use Site\Form as Form;
 
 //nice little inteface for site content
 interface SiteContent{
-    public function _InitializeClass($data, $con);
+    public function _InitializeClass($con);
 }
 
 //here is where all the names are setted, and where all the magic happend 
@@ -30,7 +30,6 @@ class InitializeSite{
     
     
     public function __destruct(){
-        self::_UseData();
         self::_LoadContent();
     }
 
@@ -52,19 +51,12 @@ class InitializeSite{
     //defining variables to classes
     private function _GetReferences(){
         self::$con = new Con\Connection();
-        self::$data = new Data\GetData();
     }
 
-    //setting and getting all names
-    private function _UseData(){
-        self::$data->_SetAll();
-        self::$data->_GetAll();
-    }
-    
     //loading all content
     private function _LoadContent(){
         foreach(self::$classes as $classes) {
-            $classes->_InitializeClass(self::$data, self::$con);
+            $classes->_InitializeClass(self::$con);
         }
     }
 }

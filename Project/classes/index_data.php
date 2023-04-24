@@ -2,35 +2,36 @@
 namespace Site\Index;
 
 require_once 'site.php';
+require_once 'helpers/data.php';
 
 use Site as S;
 
 class SiteData implements S\SiteContent{
-    //this consts are for making jquery script to show data in specific location on index, and making card looks good
-    const script_start = '<script> $("#data").html("';
-    const card_div = "<div class='mb-3 col-lg-3 col-sm-6 col-md-4'><div class='card' style='width: 19rem;'>";
-    const card_body_div = "<div class='card-body text-center'>";
+
+    use S\Data\Data;
+
+    const script_start = '<script>$("#data").html("';
     const script_end = '");</script>';
 
     //class initializing file, implemented from site.php, it also gets data in site.php
-    public function _InitializeClass($data, $con){
+    public function _InitializeClass($con){
         $res = self::_Data(
             $con,
-            $data); 
+            $this->getListView()); 
         self::_ShowData(
             $res, 
-            $data::$gid, 
-            $data::$gsku, 
-            $data::$gname, 
-            $data::$gprice, 
-            $data::$gtitle, 
-            $data::$gatribute, 
-            $data::$gdesc);
+            $this->getId(),
+            $this->getSKU(),
+            $this->getName(),
+            $this->getPrice(),
+            $this->getTitle(),
+            $this->getAtribute(),
+            $this->getDescription());
     }
     
     //getting data for cards
-    protected function _Data($con, $data){
-        $sql = "SELECT * FROM ".$data::$glistview;
+    protected function _Data($con, $view){
+        $sql = "SELECT * FROM $view";
         return $con->_Action($sql);
     }
 
@@ -38,31 +39,40 @@ class SiteData implements S\SiteContent{
     protected function _ShowData($result, $id, $sku, $name, $price, $title, $atribute, $desc){
         echo self::script_start;
         while ($row = $result->fetch_assoc()) {
-            echo self::card_div."<input type='checkbox' class='delete-checkbox form-check-input' name='checkbox[]' value='".$row[$id]."'>"
-            .self::card_body_div
-            .$row[$sku].
-            "<br>".$row[$name].
-            "<br>".$row[$price].
-            "$<br>".$row[$title].
-            "<br>".$row[$atribute].": ".$row[$desc].
-            "</div></div></div>";
+            echo $this->_CreateCard($row[$id], $row[$sku], $row[$name], $row[$price], $row[$title], $row[$atribute], $row[$desc]);
         }
         echo self::script_end;
+    }
+
+    private function _CreateCard($id, $sku, $name, $price, $title, $atribute, $desc){
+        return 
+        "<div class='mb-3 col-lg-3 col-sm-6 col-md-4'><div class='card' style='width: 19rem;'>".
+            "<input type='checkbox' class='delete-checkbox form-check-input' name='checkbox[]' value='$id'>".
+                "<div class='card-body text-center'>".
+                    "$sku <br>".
+                    "$name <br>".
+                    "Price: $price <br>".
+                    "$title <br>".
+                    "$atribute : $desc".
+                "</div>".
+            "</div>".
+        "</div>";
     }
 }
 
 class DeleteData implements S\SiteContent
 {
+    use S\Data\Data;
     //this consts are for making js script to move user to index.php
     const scr = "<script src='classes/js/go_to_inx.js'></script>";
 
     //class initializing file, implemented from site.php, it also gets data in site.php
-    public function _InitializeClass($data, $con){
-        self::_Delete($data, $con);
+    public function _InitializeClass($con){
+        self::_Delete($con);
     }
 
     //looking up all checkboxes and deleting data with id equal to checkbox value, specified in _ShowData above
-    protected function _Delete($data, $con){
+    protected function _Delete($con){
         if(isset($_POST['delete']))
         {
             if(isset($_POST["checkbox"])){
@@ -70,8 +80,8 @@ class DeleteData implements S\SiteContent
             foreach ($chk as $delateid){
                 self::_DeleteElement(   $con,
                                         $delateid, 
-                                        $data::$gtable, 
-                                        $data::$gid);
+                                        $this->getTableName(), 
+                                        $this->getId());
             }
             echo self::scr;
             }

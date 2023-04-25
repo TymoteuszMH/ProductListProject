@@ -17,7 +17,7 @@ trait Data
     private $title;
     private $atribute;
 
-    public function setTableName($tablename)
+    protected function setTableName($tablename)
     {
         $this->tablename = $tablename;
     }
@@ -27,7 +27,7 @@ trait Data
         return $this->tablename;
     }
 
-    public function setTypeTableName($typetablename)
+    protected function setTypeTableName($typetablename)
     {
         $this->typetablename = $typetablename;
     }
@@ -37,7 +37,7 @@ trait Data
         return $this->typetablename;
     }
 
-    public function setID($id)
+    protected function setID($id)
     {
         $this->id = $id;
     }
@@ -46,7 +46,7 @@ trait Data
     {
         return $this->id;
     }
-    public function setSKU($sku)
+    protected function setSKU($sku)
     {
         $this->sku = $sku;
     }
@@ -56,7 +56,7 @@ trait Data
         return $this->sku;
     }
 
-    public function setName($name)
+    protected function setName($name)
     {
         $this->name = $name;
     }
@@ -66,7 +66,7 @@ trait Data
         return $this->name;
     }
 
-    public function setPrice($price)
+    protected function setPrice($price)
     {
         $this->price = $price;
     }
@@ -76,7 +76,7 @@ trait Data
         return $this->price;
     }
 
-    public function setTitle($title)
+    protected function setTitle($title)
     {
         $this->title = $title;
     }
@@ -85,7 +85,7 @@ trait Data
     {
         return $this->title;
     }
-    public function setAtribute($atribute)
+    protected function setAtribute($atribute)
     {
         $this->atribute = $atribute;
     }
@@ -95,7 +95,7 @@ trait Data
         return $this->atribute;
     }
 
-    public function setDescription($description)
+    protected function setDescription($description)
     {
         $this->description = $description;
     }
@@ -105,7 +105,7 @@ trait Data
         return $this->description;
     }
 
-    public function setProductTypeID($producttypeid)
+    protected function setProductTypeID($producttypeid)
     {
         $this->producttypeid = $producttypeid;
     }
@@ -115,7 +115,7 @@ trait Data
         return $this->producttypeid;
     }
 
-    public function setTypeID($typeid)
+    protected function setTypeID($typeid)
     {
         $this->typeid = $typeid;
     }
@@ -124,7 +124,7 @@ trait Data
     {
         return $this->typeid;
     }
-    public function setListView($listview)
+    protected function setListView($listview)
     {
         $this->listview = $listview;
     }
@@ -134,7 +134,7 @@ trait Data
         return $this->listview;
     }
 
-    public function __construct()
+    public function _SetAll()
     {
         $this->setTableName('product');
         $this->setTypeTableName('producttype');

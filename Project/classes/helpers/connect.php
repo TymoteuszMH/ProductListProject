@@ -2,8 +2,9 @@
 namespace Site\Connect;
 
 use mysqli as mysql;
+use mysqli_sql_exception;
 
-class Connection
+trait Connection
 {
     //Connecting to database and returning it, so it could be use to send data
     private function _ConnectDatabase()
@@ -18,7 +19,7 @@ class Connection
 
     //Sending SQL question to database
     public function _Action($sql){
-        $connect = $this->_ConnectDatabase();
+        $connect = $this->_ConnectDatabase(); 
         $result = $connect->query($sql);
         $connect->close();
         return $result;

@@ -2,8 +2,7 @@
 namespace Site\Data;
 
 //setters and getters for sql names 
-trait Data
-{
+trait Data{
     private $tablename;
     private $typetablename;
     private $listview;
@@ -17,96 +16,78 @@ trait Data
     private $title;
     private $atribute;
 
-    protected function setTableName($tablename)
-    {
+    public function setTableName($tablename){
         $this->tablename = $tablename;
     }
 
-    public function getTableName()
-    {
+    public function getTableName(){
         return $this->tablename;
     }
 
-    protected function setTypeTableName($typetablename)
-    {
+    public function setTypeTableName($typetablename){
         $this->typetablename = $typetablename;
     }
 
-    public function getTypeTableName()
-    {
+    public function getTypeTableName(){
         return $this->typetablename;
     }
 
-    protected function setID($id)
-    {
+    public function setID($id){
         $this->id = $id;
     }
 
-    public function getID()
-    {
+    public function getID(){
         return $this->id;
     }
-    protected function setSKU($sku)
-    {
+    public function setSKU($sku){
         $this->sku = $sku;
     }
 
-    public function getSKU()
-    {
+    public function getSKU(){
         return $this->sku;
     }
 
-    protected function setName($name)
-    {
+    public function setName($name){
         $this->name = $name;
     }
 
-    public function getName()
-    {
+    public function getName(){
         return $this->name;
     }
 
-    protected function setPrice($price)
-    {
+    public function setPrice($price){
         $this->price = $price;
     }
 
-    public function getPrice()
-    {
+    public function getPrice(){
         return $this->price;
     }
 
-    protected function setTitle($title)
-    {
+    public function setTitle($title){
         $this->title = $title;
     }
 
-    public function getTitle()
-    {
+    public function getTitle(){
         return $this->title;
     }
-    protected function setAtribute($atribute)
-    {
+
+    public function setAtribute($atribute){
         $this->atribute = $atribute;
     }
 
-    public function getAtribute()
-    {
+    public function getAtribute(){
         return $this->atribute;
     }
 
-    protected function setDescription($description)
-    {
+    public function setDescription($description){
         $this->description = $description;
     }
 
-    public function getDescription()
-    {
+    public function getDescription(){
         return $this->description;
     }
 
-    protected function setProductTypeID($producttypeid)
-    {
+    public function setProductTypeID($producttypeid){
         $this->producttypeid = $producttypeid;
     }
 
@@ -115,27 +96,22 @@ trait Data
         return $this->producttypeid;
     }
 
-    protected function setTypeID($typeid)
-    {
+    public function setTypeID($typeid){
         $this->typeid = $typeid;
     }
 
-    public function getTypeID()
-    {
+    public function getTypeID(){
         return $this->typeid;
     }
-    protected function setListView($listview)
-    {
+    public function setListView($listview){
         $this->listview = $listview;
     }
 
-    public function getListView()
-    {
+    public function getListView(){
         return $this->listview;
     }
 
-    public function _SetAll()
-    {
+    public function _SetAll(){
         $this->setTableName('product');
         $this->setTypeTableName('producttype');
         $this->setListView('list');

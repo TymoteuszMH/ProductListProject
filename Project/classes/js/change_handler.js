@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    //loading product types
 	$.ajax({
 		url: 'classes/form/modal.php',
 		type: 'post',
@@ -7,6 +8,7 @@ $(document).ready(function(){
 		}
 	});
 
+    //changing product type in add_form.html after changing product's type
     $('#productType').change(function(){
         if($(this).val() == '1'){
             $('#Desc').html("<label for='size' class='form-label'>Size(MB): </label> <input type='number' step='any' class='form-control' id='size' name='desc'><br>");

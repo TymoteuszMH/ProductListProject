@@ -16,6 +16,7 @@ trait Data{
     private $title;
     private $atribute;
 
+    //getters and setters for all table properties
     public function setTableName($tablename){
         $this->tablename = $tablename;
     }
@@ -110,7 +111,7 @@ trait Data{
     public function getListView(){
         return $this->listview;
     }
-
+    //setting all values
     public function _SetAll(){
         $this->setTableName('product');
         $this->setTypeTableName('producttype');

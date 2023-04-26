@@ -2,15 +2,15 @@
 namespace Site\Form;
 
 require_once '../helpers/data.php';
-require_once '../helpers/validate.php';
 require_once '../helpers/questions.php';
 require_once '../interfaces/site_content.php';
 
 class SendForm implements \Site\SiteContent\SiteContent{   
+    //using getters and setters from Data and getting data from Questions
     use \Site\Data\Data;
     use \Site\Questions\Questions;
     
-    //class initializing file, implemented from site.php, it also gets data in site.php
+    //class initializing file, implemented from site_content.php
     public function _InitializeClass(){
         self::_SetAll();
         self::_FormData();
@@ -19,6 +19,7 @@ class SendForm implements \Site\SiteContent\SiteContent{
     //in order: chenging if sku already exists, validating description of different types, defining data, showing error if something wrong, else sending data
     private function _FormData(){
         $skuF = $_POST["sku"];
+        //checking if sku exists
         $check = self::_Check($this->getTableName(),
                                 $this->getSKU(),
                                 $skuF);
@@ -44,6 +45,7 @@ class SendForm implements \Site\SiteContent\SiteContent{
                         $descF);
     }
 }
+//initializing file
 $class = new SendForm;
 $class->_InitializeClass();
 ?>

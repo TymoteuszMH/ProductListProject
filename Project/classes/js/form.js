@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	//submiting form
 	$("#sub").click(function(e){
 		
 			
@@ -8,6 +9,7 @@ $(document).ready(function(){
 		var name = $("#name").val();
 		var price = $("#price").val();
 		var type = $("#productType").val();
+		//validating description
 		switch (type){
 			case '1':
 				var desc = $("#size").val() + 'kg';
@@ -21,13 +23,12 @@ $(document).ready(function(){
 			default:
 				var desc = "";
 		}
-		console.log(sku, name, price, type, desc)
+		//finding blank fields
 		if(sku==''||name==''||price==''||type==''||desc=='') {
 			alert("Please fill all fields.");
 			return false;
 		}
-
-		
+		//sending post request to form.php
 		$.ajax({
 			type: "POST",
 			url: 'classes/form/form.php',
@@ -38,7 +39,7 @@ $(document).ready(function(){
 				type: type,
 				desc: desc
 				},
-				
+			//if sku already exist in data base site is showing error above form
 			success: function(data) {
 				if(data == 'error'){
 					$("#error").html("SKU already exist!");

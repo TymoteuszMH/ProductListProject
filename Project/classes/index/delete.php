@@ -6,16 +6,17 @@ require_once '../helpers/questions.php';
 require_once '../interfaces/site_content.php';
 
 class DeleteData implements \Site\SiteContent\SiteContent{
+    //using getters and setters from Data and getting data from Questions
     use \Site\Data\Data;
     use \Site\Questions\Questions;
 
-    //class initializing file, implemented from site.php, it also gets data in site.php
+    //class initializing file, implemented from site_content.php
     public function _InitializeClass(){
         self::_SetAll();
         self::_Delete();
     }
 
-    //looking up all checkboxes and deleting data with id equal to checkbox value, specified in _ShowData above
+    //getting ids for delete from index.js and deleting them
     protected function _Delete(){
         $chk = $_POST["checkbox"];
         foreach ($chk as $delateid){
@@ -25,7 +26,7 @@ class DeleteData implements \Site\SiteContent\SiteContent{
         }
     }
 }
-
+//initializing file
 $class = new DeleteData;
 $class->_InitializeClass();
 ?>

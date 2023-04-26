@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	//function to get all posts and show them
 	function getData(){
 		$.ajax({
 			url: 'classes/index/index_data.php',
@@ -8,7 +9,7 @@ $(document).ready(function(){
 			}
 		});
 	}
-	
+	//deleting multiple elements by id in card then refreshing data
 	$("#delete").click(function(e){
 		e.preventDefault();
 

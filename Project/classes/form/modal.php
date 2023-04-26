@@ -6,8 +6,11 @@ require_once '../helpers/questions.php';
 require_once '../interfaces/site_content.php';
 
 class Modal implements \Site\SiteContent\SiteContent{   
+    //using getters and setters from Data and getting data from Questions
     use \Site\Data\Data;
     use \Site\Questions\Questions;
+    
+    //class initializing file, implemented from site_content.php
     public function _InitializeClass(){
         self::_SetAll();
         $result = self::_GetData($this->getTypeTableName());
@@ -16,7 +19,7 @@ class Modal implements \Site\SiteContent\SiteContent{
                         $this->getTypeID());
     }
 
-    //getting all tipes and showing them as options
+    //getting all types and showing them as options
     private function _Options($result, $title, $typeID){
         echo "<option value='' selected disabled hidden>Choose here</option>";
         while ($row = $result->fetch_assoc()) { 
@@ -24,6 +27,7 @@ class Modal implements \Site\SiteContent\SiteContent{
         }
     }
 }
+//initializing file
 $class = new Modal;
 $class->_InitializeClass();
 ?>
